@@ -22,7 +22,7 @@
   </head>
   <body>
     <h1>Hello, world!</h1>
-
+    <h1><?php echo 'Hello, world!'; ?></h1>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="assets/jquery/dist/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

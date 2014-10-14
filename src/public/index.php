@@ -1,31 +1,34 @@
-<?php 
-    require '../../vendor/autoload.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+<?php
+session_start();
 
-    <!-- Bootstrap -->
-    <link href="assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/bootflatv2/bootflat/css/bootflat.min.css" rel="stylesheet">
+if (empty($_GET['page'])){
+    $pathPage = '../pages/accueil.php';
+}else{
+    $pathPage = '../pages/' . $_GET['page'] . '.php';
+    if (!file_exists($pathPage)){
+        http_response_code(404);    // pour que le code http de la page soit bien 404
+        $pathPage = '../404.php';
+    }
+    // pour récupérer la page active et la fournir dans l'attribut action du form
+    $active = "?page=" . $_GET['page'];           
+}
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="assets/html5shiv/dist/html5shiv.min.js"></script>
-      <script src="assets/respond/dest/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <h1><?php echo 'Hello, world!'; ?></h1>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="assets/jquery/dist/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
+$erreur = NULL;
+if (isset($_SESSION['erreur'])){
+    foreach ($_SESSION['erreur'] as $value){
+        $erreur .= '<div class="alert alert-danger" role = "alert">' . $value . '</div>';
+    }
+    unset($_SESSION['erreur']);
+}
+
+ob_start();
+    require_once $pathPage;
+$buffer = ob_get_clean();
+
+require_once '../layout/header.php'; 
+// require_once '../layout/menu.php'; 
+
+echo $erreur;
+echo $buffer;
+
+require_once '../layout/footer.php';

@@ -11,6 +11,8 @@
 	       rel="stylesheet">
         <link href="assets/bootflatv2/bootflat/css/bootflat.min.css"
 	       rel="stylesheet">
+        <link href="css/app.css"
+	       rel="stylesheet">	       
         <?php if (isset($afterBootstrap)) {echo $afterBootstrap;}?>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -21,3 +23,4 @@
             <![endif]-->
     </head>
     <body>
+    <?php require_once '../layout/menu.php';?>    

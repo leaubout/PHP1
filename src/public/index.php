@@ -7,7 +7,7 @@ if (empty($_GET['page'])){
     $pathPage = '../pages/' . $_GET['page'] . '.php';
     if (!file_exists($pathPage)){
         http_response_code(404);    // pour que le code http de la page soit bien 404
-        $pathPage = '../404.php';
+        $pathPage = '404.php';
     }
     // pour récupérer la page active et la fournir dans l'attribut action du form
     $active = "?page=" . $_GET['page'];           
@@ -26,7 +26,6 @@ ob_start();
 $buffer = ob_get_clean();
 
 require_once '../layout/header.php'; 
-// require_once '../layout/menu.php'; 
 
 echo $erreur;
 echo $buffer;

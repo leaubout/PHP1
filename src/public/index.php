@@ -25,9 +25,14 @@ ob_start();
     require_once $pathPage;
 $buffer = ob_get_clean();
 
-require_once '../layout/header.php'; 
+if (!(isset($noHeader) && ($noHeader == TRUE))){
+    require_once '../layout/header.php';
+}     
 
 echo $erreur;
 echo $buffer;
 
-require_once '../layout/footer.php';
+if (!(isset($noFooter) && ($noFooter == TRUE))){
+    require_once '../layout/footer.php';
+}
+

@@ -14,6 +14,15 @@
     }
 
 
+    function cleanPOST(array $data){
+        $dataClean = array();
+        foreach($data as $key => $value){
+            $keyClean = htmlentities(strip_tags($key)); 
+            $valueClean = htmlentities(strip_tags($value));
+            $dataClean[$keyClean] = $valueClean;
+        }
+        return $dataClean;
+    }
 
   
     
